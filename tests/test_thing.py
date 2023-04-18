@@ -19,3 +19,10 @@ class TestThing(unittest.TestCase):
         response = self.game.run("add player Pluto")
 
         self.assertEquals(response, "players: Pippo, Pluto")
+
+    def test_cannot_add_a_repeated_player(self):
+        self.game.run("add player Pippo")
+
+        response = self.game.run("add player Pippo")
+
+        self.assertEquals(response, "Pippo: already existing player")

@@ -3,5 +3,8 @@ class Game:
         self.user_names = []
 
     def run(self, user_input: str):
-        self.user_names.append(user_input.split(" ")[-1])
+        user_name = user_input.split(" ")[-1]
+        if user_name in self.user_names:
+            return f"{user_name}: already existing player"
+        self.user_names.append(user_name)
         return f"players: {', '.join(self.user_names)}"
