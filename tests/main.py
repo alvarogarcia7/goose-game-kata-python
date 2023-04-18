@@ -6,7 +6,7 @@ class Player:
         self.name = name
         self.position = position
 
-    def move(self, spaces):
+    def move(self, spaces: int) -> None:
         self.position += spaces
 
     def __eq__(self, o: object) -> bool:
@@ -26,7 +26,7 @@ class Game:
         action = user_input_parts[0]
         if action == 'move':
             user_name = user_input_parts[1]
-            die_values = list(map(lambda x: x.strip().replace(',', ''), user_input_parts[-2:]))
+            die_values = self.ui_representation.get_die_values(user_input_parts[-2:])
             sum_of_die = sum(map(lambda x: int(x), die_values))
             user = self.players.find_by_name(user_name)
             previous_position = self.ui_representation.position(user.position)
@@ -38,7 +38,7 @@ class Game:
             elif user.position > 63:
                 current_position = self.ui_representation.position(63)
                 moving_message = f'{user_name} rolls {", ".join(die_values)}. {user_name} moves from {previous_position} to {current_position}'
-                user.move(2*(63 - user.position))
+                user.move(2 * (63 - user.position))
                 moving_message += f". {user_name} bounces! {user_name} returns to {self.ui_representation.position(user.position)}"
             return moving_message
         try:
@@ -72,3 +72,7 @@ class UIRepresentation:
         if not index_of_position:
             result = 'Start'
         return result
+
+    @staticmethod
+    def get_die_values(raw_values: [str]) -> [int]:
+        return list(map(lambda x: x.strip().replace(',', ''), raw_values))
