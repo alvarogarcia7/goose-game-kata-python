@@ -28,9 +28,7 @@ class Game:
             die_values = list(map(lambda x: x.strip().replace(',', ''), user_input_parts[-2:]))
             sum_of_die = sum(map(lambda x: int(x), die_values))
             user = self.players.find_by_name(user_name)
-            previous_position = str(user.position)
-            if not user.position:
-                previous_position = 'Start'
+            previous_position = UIRepresentation().position(user.position)
             user.move(sum_of_die)
             current_position = user.position
             return f'{user_name} rolls {", ".join(die_values)}. Pippo moves from {previous_position} to {current_position}'
@@ -57,3 +55,11 @@ class PlayerRepository:
 
     def find_by_name(self, name):
         return list(filter(lambda player: player.name == name, self.names))[0]
+
+
+class UIRepresentation:
+    def position(self, index_of_position) -> str:
+        result = str(index_of_position)
+        if not index_of_position:
+            result = 'Start'
+        return result

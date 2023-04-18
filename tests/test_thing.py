@@ -1,6 +1,6 @@
 import unittest
 
-from tests.main import Game, PlayerRepository, Player
+from tests.main import Game, PlayerRepository, Player, UIRepresentation
 from unittest.mock import Mock, MagicMock
 
 
@@ -73,3 +73,12 @@ class TestPlayer(unittest.TestCase):
         player.move(1)
 
         self.assertEquals(1, player.position)
+
+
+class TestUIRepresentation(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.ui_representation = UIRepresentation()
+
+    def test_show_position_start(self):
+        self.assertEquals('Start', self.ui_representation.position(0))
