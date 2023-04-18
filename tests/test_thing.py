@@ -8,20 +8,20 @@ class TestGame(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.players = PlayerRepository()
-        self.players.find_all = MagicMock(return_value=[])
         self.game = Game(self.players)
 
     def test_add_a_player(self):
         self.players.add = MagicMock()
+        self.players.find_all = MagicMock(return_value=[])
 
         self.game.run("add player Pippo")
 
         self.players.add.assert_called_with('Pippo')
 
     def test_formatting_of_the_resulting_players(self):
-        self.players.find_all = MagicMock(return_value=['Pippo', 'Pluto'])
+        self.players.add('Pippo')
 
-        response = self.game.run("")
+        response = self.game.run("add player Pluto")
 
         self.assertEquals(response, "players: Pippo, Pluto")
 
