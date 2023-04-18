@@ -32,7 +32,10 @@ class Game:
             previous_position = self.ui_representation.position(user.position)
             user.move(sum_of_die)
             current_position = self.ui_representation.position(user.position)
-            return f'{user_name} rolls {", ".join(die_values)}. {user_name} moves from {previous_position} to {current_position}'
+            moving_message = f'{user_name} rolls {", ".join(die_values)}. {user_name} moves from {previous_position} to {current_position}'
+            if user.position == 63:
+                moving_message += f". {user_name} wins!!"
+            return moving_message
         try:
             self.players.add(Player(user_name, 0))
         except Exception:

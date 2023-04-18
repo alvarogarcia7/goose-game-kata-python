@@ -48,6 +48,14 @@ class TestGame(unittest.TestCase):
 
         self.assertEquals(response, "Pluto rolls 4, 2. Pluto moves from 1 to 7")
 
+    def test_winning_the_game(self):
+        self.players.add(Player('Pippo', 60))
+        self.players.add(Player('Pluto', 0))
+
+        response = self.game.run("move Pippo 1, 2")
+
+        self.assertEquals(response, "Pippo rolls 1, 2. Pippo moves from 60 to 63. Pippo wins!!")
+
 
 class TestPlayers(unittest.TestCase):
 
