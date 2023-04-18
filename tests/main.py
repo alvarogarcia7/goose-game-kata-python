@@ -35,6 +35,11 @@ class Game:
             moving_message = f'{user_name} rolls {", ".join(die_values)}. {user_name} moves from {previous_position} to {current_position}'
             if user.position == 63:
                 moving_message += f". {user_name} wins!!"
+            elif user.position > 63:
+                current_position = self.ui_representation.position(63)
+                moving_message = f'{user_name} rolls {", ".join(die_values)}. {user_name} moves from {previous_position} to {current_position}'
+                user.move(2*(63 - user.position))
+                moving_message += f". {user_name} bounces! {user_name} returns to {self.ui_representation.position(user.position)}"
             return moving_message
         try:
             self.players.add(Player(user_name, 0))

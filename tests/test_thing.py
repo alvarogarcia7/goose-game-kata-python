@@ -56,6 +56,14 @@ class TestGame(unittest.TestCase):
 
         self.assertEquals(response, "Pippo rolls 1, 2. Pippo moves from 60 to 63. Pippo wins!!")
 
+    def test_bounce_past_the_winning_space(self):
+        self.players.add(Player('Pippo', 60))
+        self.players.add(Player('Pluto', 0))
+
+        response = self.game.run("move Pippo 3, 2")
+
+        self.assertEquals(response, "Pippo rolls 3, 2. Pippo moves from 60 to 63. Pippo bounces! Pippo returns to 61")
+
 
 class TestPlayers(unittest.TestCase):
 
