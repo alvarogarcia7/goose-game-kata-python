@@ -17,6 +17,7 @@ class Game:
     def __init__(self, players: PlayerRepository) -> None:
         self.players = players
         self.user_names = []
+        self.ui_representation = UIRepresentation()
 
     def run(self, user_input: str):
         user_input_parts = user_input.split(" ")
@@ -28,9 +29,9 @@ class Game:
             die_values = list(map(lambda x: x.strip().replace(',', ''), user_input_parts[-2:]))
             sum_of_die = sum(map(lambda x: int(x), die_values))
             user = self.players.find_by_name(user_name)
-            previous_position = UIRepresentation().position(user.position)
+            previous_position = self.ui_representation.position(user.position)
             user.move(sum_of_die)
-            current_position = user.position
+            current_position = self.ui_representation.position(user.position)
             return f'{user_name} rolls {", ".join(die_values)}. Pippo moves from {previous_position} to {current_position}'
         try:
             self.players.add(Player(user_name, 0))
