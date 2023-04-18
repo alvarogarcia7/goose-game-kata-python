@@ -1,11 +1,20 @@
+import unittest
+
 from app.thing import Thing
 
 
-def test_correct_greeting():
-    thing = Thing("Bob")
-    assert "Hello Bob!" == thing.return_hello_name()
+class Game:
+    def run(self, user_input: str):
+        return "players: Pippo"
 
+class TestThing(unittest.TestCase):
+    def setUp(self) -> None:
+        super().setUp()
+        self.game = Game()
 
-def test_fail():
-    thing = Thing("Albert")
-    assert "Wrong!" == thing.return_hello_name()
+    def test_add_player(self):
+
+        response = self.game.run("add player Pippo")
+
+        self.assertEquals(response, "players: Pippo")
+
