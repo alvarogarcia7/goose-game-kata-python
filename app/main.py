@@ -4,7 +4,7 @@ from tests.main import Game
 
 
 def main():
-    game = Game()
+    game = Game(x)
     while True:
         strip = sys.stdin.readline().strip()
         if not strip:
