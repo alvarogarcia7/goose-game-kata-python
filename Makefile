@@ -19,11 +19,11 @@ install-githooks: check-virtual-env
 install-antlr:
 	curl -O https://www.antlr.org/download/antlr-4.9.3-complete.jar
 
-test: check-virtual-env typecheck compile-grammar test-python
+test: check-virtual-env typecheck test-python
 .PHONY: test
 
 test-python: check-virtual-env
-	pytest parser tests
+	pytest -v tests
 .PHONY: test-python
 
 typecheck: check-virtual-env
@@ -35,11 +35,6 @@ requirements: check-virtual-env requirements.txt
 
 pre-commit: test
 .PHONY: pre-commit
-
-compile-grammar: training.g4
-	rm -rf dist/
-	java -jar antlr*.jar -Dlanguage=Python3 training.g4 -listener -visitor -o dist
-	@echo "Grammar generated"
 
 run: check-virtual-env
 	$(MAKE) run-splitter
