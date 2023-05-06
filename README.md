@@ -1,7 +1,13 @@
+# Goose Game Kata
+
+https://github.com/xpeppers/goose-game-kata
+
+
+
 # Project layout
 
-- `app` contains dummy package to be tested 
-- `tests` contains tests definitions 
+- `app` contains dummy package to be tested
+- `tests` contains tests definitions
 
 # Python with pytest
 
