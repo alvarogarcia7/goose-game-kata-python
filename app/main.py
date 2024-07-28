@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sys
-from typing import List, Any, Tuple
+from typing import List, Any, Tuple, cast
 
 
 def main() -> None:
@@ -34,7 +34,9 @@ class PlayerRepository:
         return self.names
 
     def find_by_name(self, name: str) -> Player:
-        return list(filter(lambda player: player.name == name, self.names))[0]
+        player: Player = list(filter(lambda current: current.name == name, self.names))[0]
+        assert player is not None
+        return player
 
 
 class UIRepresentation:
